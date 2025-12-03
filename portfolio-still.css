@@ -2,7 +2,7 @@ html { box-sizing: border-box; } *, *::before, *::after { box-sizing: inherit; }
 body{
     font-family: 'Courier New', Courier, monospace;
     width: 80%;
-    margin 20px auto; 
+    margin: 20px auto; 
     background-color: blueviolet;
     padding: 20px;
 }
