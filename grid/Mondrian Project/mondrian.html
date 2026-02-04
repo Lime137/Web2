@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+
+<style>
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #ccc;
+}
+
+.container {
+  width: 748px;
+  height: 748px;
+  display: grid;
+  grid-template-columns: 320px 9px 419px;
+  grid-template-rows: 414px 9px auto;
+  background: #000;
+}
+
+.red {
+  background: #E72F24;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.white1 {
+  background: #F0F1EC;
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+}
+
+.white2 {
+  background: #F0F1EC;
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
+}
+
+.bottom {
+  grid-column: 3 / 4;
+  grid-row: 3 / 4;
+  display: grid;
+  grid-template-columns: auto 10px 50px;
+  grid-template-rows: 130px auto 20px;
+  background: #000;
+}
+
+.white3 {
+  background: #F0F1EC;
+}
+
+.blue {
+  background: #004592;
+}
+
+.yellow {
+  background: #F9D01E;
+}
+
+.black {
+  background: #232629;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="red"></div>
+  <div class="white1"></div>
+  <div class="white2"></div>
+
+  <div class="bottom">
+    <div class="white3"></div>
+    <div></div>
+    <div class="blue"></div>
+
+    <div class="white3"></div>
+    <div></div>
+    <div class="white3"></div>
+
+    <div class="yellow"></div>
+    <div></div>
+    <div class="black"></div>
+  </div>
+</div>
+
+</body>
+</html>
