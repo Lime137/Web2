@@ -1,0 +1,46 @@
+/* Länken blir röd vid hover */
+a:hover {
+    color: red;
+}
+
+/* Knappen blir mörkare när man klickar */
+button:active {
+    background-color: #555;
+    color: white;
+}
+
+/* Input får blå ram när den är markerad */
+input:focus {
+    outline: 3px solid blue;
+}
+
+/* Första list-elementet fetstil */
+.hobbylista li:first-child {
+    font-weight: bold;
+}
+
+/* Varannan rad i listan ljus bakgrund */
+.hobbylista li:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Stjärna före varje listpunkt */
+.hobbylista li::before {
+    content: "⭐ ";
+}
+
+/* Text efter länken */
+a::after {
+    content: " (klicka här)";
+}
+
+/* Första bokstaven i introtexten */
+.intro::first-letter {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+/* Första raden kursiv */
+.intro::first-line {
+    font-style: italic;
+}
