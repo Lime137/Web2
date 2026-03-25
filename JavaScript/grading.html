@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Betygsättare</title>
+</head>
+<body>
+    <h1>Betygsättare</h1>
+   <script>
+    let poäng = 49;
+    let betyg = "";
+    if (poäng >= 90) {
+        betyg = "A";
+    } else if (poäng >= 80) {
+        betyg = "B";
+    } else if (poäng >= 70) {
+        betyg = "C";
+    } else if (poäng >= 60) {
+        betyg = "D";
+    } else if (poäng >= 50) {
+        betyg = "E";
+    } else if (poäng < 50) {
+        betyg = "F";
+    }
+    document.write("Du fick betyget: " + betyg);
+   </script> 
+</body>
+</html>
