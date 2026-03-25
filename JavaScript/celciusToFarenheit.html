@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Celcius till Farenheit</h1>
+    <script>
+        function celciusToFarenheit(celcius) {
+            let farenheit = (celcius * 9/5) + 32;
+            return farenheit;
+        }
+        let tempCelcius = 20;
+        let tempFarenheit = celciusToFarenheit(tempCelcius);
+        document.write(tempCelcius + " grader Celcius är lika med " + tempFarenheit + " grader Farenheit.");
+
+    </script>
+</body>
+</html>
