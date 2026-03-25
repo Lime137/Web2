@@ -6,15 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Celcius till Farenheit</h1>
+    <h1>Farenheit till Celcius</h1>
     <script>
-        function celciusToFarenheit(celcius) {
-            let farenheit = (celcius * 9/5) + 32;
-            return farenheit;
+        function farenheitToCelcius(farenheit) {
+            let celcius = (farenheit - 32) * 5/9;
+            return celcius;
         }
-        let tempCelcius = 20;
-        let tempFarenheit = celciusToFarenheit(tempCelcius);
-        document.write(tempCelcius + " grader Celcius är lika med " + tempFarenheit + " grader Farenheit.");
+        let tempFarenheit = 104;
+        let tempCelcius = farenheitToCelcius(tempFarenheit);
+        document.write(tempFarenheit + " grader Farenheit är lika med " + tempCelcius + " grader Celcius.");
 
     </script>
 </body>
