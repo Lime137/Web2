@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<title>Bio-bokaren – modern design</title>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 40px 20px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        font-size: 2.5rem;
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .info {
+        margin-bottom: 30px;
+        font-size: 1.2rem;
+        background: rgba(255,255,255,0.1);
+        padding: 10px 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .salong {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        max-width: 600px;
+    }
+
+    .plats {
+        width: 80px;
+        height: 80px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        background-color: #4caf50;
+    }
+
+    .plats:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+    }
+
+    .bokad {
+        background-color: #f44336;
+        cursor: not-allowed;
+        transform: none !important;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 12px 25px;
+        font-size: 1rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        background: #ff9800;
+        color: #fff;
+        transition: all 0.3s ease;
+        margin-right: 10px;
+    }
+
+    button:hover {
+        background: #ffc107;
+        transform: scale(1.05);
+    }
+
+</style>
+</head>
+<body>
+
+<h1>🎟️ Bio-bokaren</h1>
+<div class="info" id="info"></div>
+
+<div class="salong" id="salong"></div>
+
+<!-- Knappar -->
+<button onclick="bokaFörstaLediga()">Boka första lediga plats</button>
+<button onclick="bokaTvåBredvid()">Boka 2 platser bredvid varandra</button>
+<button onclick="startaOm()">Starta om</button>
+
+<script>
+    let platser = [0, 1, 0, 0, 1, 0, 0, 0, 1, 0];
+
+    function uppdateraUI() {
+        let salong = document.getElementById("salong");
+        salong.innerHTML = "";
+
+        let lediga = 0;
+        let bokade = 0;
+
+        for (let i = 0; i < platser.length; i++) {
+            let div = document.createElement("div");
+            div.classList.add("plats");
+
+            if (platser[i] === 0) {
+                div.innerText = i + 1;
+                lediga++;
+                div.onclick = function() {
+                    bokaPlats(i);
+                };
+            } else {
+                div.classList.add("bokad");
+                div.innerText = "X";
+                bokade++;
+            }
+
+            salong.appendChild(div);
+        }
+
+        document.getElementById("info").innerText =
+            "Lediga platser: " + lediga + " | Bokade platser: " + bokade;
+    }
+
+    function bokaPlats(index) {
+        if (platser[index] === 1) {
+            alert("Platsen är redan bokad!");
+            return;
+        }
+        platser[index] = 1;
+        uppdateraUI();
+    }
+
+    function bokaFörstaLediga() {
+        for (let i = 0; i < platser.length; i++) {
+            if (platser[i] === 0) {
+                platser[i] = 1;
+                break;
+            }
+        }
+        uppdateraUI();
+    }
+
+    function bokaTvåBredvid() {
+        let hittad = false;
+        for (let i = 0; i < platser.length - 1; i++) {
+            if (platser[i] === 0 && platser[i + 1] === 0) {
+                platser[i] = 1;
+                platser[i + 1] = 1;
+                hittad = true;
+                break;
+            }
+        }
+        if (!hittad) {
+            alert("Inga två lediga platser bredvid varandra hittades!");
+        }
+        uppdateraUI();
+    }
+
+    function startaOm() {
+        for (let i = 0; i < platser.length; i++) {
+            platser[i] = 0;
+        }
+        uppdateraUI();
+    }
+
+    uppdateraUI();
+</script>
+
+</body>
+</html>

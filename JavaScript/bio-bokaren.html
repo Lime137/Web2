@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <title>Bio-bokaren</title>
+    <style>
+        body { font-family: Arial; text-align: center; }
+        .platser { font-size: 30px; margin: 20px; }
+        button { padding: 10px; margin: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>🎬 Bio-bokaren</h1>
+
+    <p id="info"></p>
+    <div class="platser" id="visning"></div>
+
+    <button onclick="bokaEn()">Boka 1 plats</button>
+    <button onclick="bokaGrupp()">Boka 2 platser</button>
+
+    <script>
+        let platser = [0, 1, 0, 0, 1, 0, 0, 0, 1, 0];
+
+        function uppdateraUI() {
+            let lediga = 0;
+            let bokade = 0;
+            let visning = "";
+
+            for (let i = 0; i < platser.length; i++) {
+                if (platser[i] === 0) {
+                    lediga++;
+                    visning += "🟢 ";
+                } else {
+                    bokade++;
+                    visning += "🔴 ";
+                }
+            }
+
+            document.getElementById("info").innerText =
+                "Lediga platser: " + lediga + ", Bokade platser: " + bokade;
+
+            document.getElementById("visning").innerText = visning;
+        }
+
+        function bokaEn() {
+            for (let i = 0; i < platser.length; i++) {
+                if (platser[i] === 0) {
+                    platser[i] = 1;
+                    break;
+                }
+            }
+            uppdateraUI();
+        }
+
+        function bokaGrupp() {
+            let hittad = false;
+
+            for (let i = 0; i < platser.length - 1; i++) {
+                if (platser[i] === 0 && platser[i + 1] === 0) {
+                    platser[i] = 1;
+                    platser[i + 1] = 1;
+                    hittad = true;
+                    break;
+                }
+            }
+
+            if (!hittad) {
+                alert("Inga parkopplade platser hittades");
+            }
+
+            uppdateraUI();
+        }
+
+        // Körs när sidan laddas
+        uppdateraUI();
+    </script>
+
+</body>
+</html>
