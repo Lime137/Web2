@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>56th Siege Battalion</title>
+    <style>
+        :root {
+            --red-56: #6c2114;
+            --black-56: #151410;
+            --gray-56: #6c6c6c;
+            --text-primary: #f2f2f2;
+            --text-muted: #c7c7c7;
+            --surface: #1f1a1a;
+            --border: rgba(255, 255, 255, 0.08);
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: radial-gradient(circle at top, rgba(108, 33, 20, 0.14), transparent 24%),
+                        linear-gradient(180deg, #0d0c0c 0%, #151410 48%, #0d0c0c 100%);
+            color: var(--text-primary);
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(180deg, transparent 0, transparent 60px, rgba(255,255,255,0.02) 61px, rgba(255,255,255,0.02) 62px);
+            pointer-events: none;
+            opacity: 0.2;
+        }
+
+        .page-shell {
+            position: relative;
+            z-index: 1;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 28px 24px 48px;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            flex-wrap: wrap;
+            padding: 18px 22px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            background: rgba(21, 20, 16, 0.9);
+            backdrop-filter: blur(14px);
+            margin-bottom: 32px;
+        }
+
+        .title-block {
+            max-width: 640px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: rgba(108, 33, 20, 0.16);
+            border: 1px solid rgba(108, 33, 20, 0.4);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--red-56);
+            font-size: 0.88rem;
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2.4rem, 4vw, 4rem);
+            letter-spacing: -0.05em;
+            line-height: 1.01;
+        }
+
+        p.lead {
+            margin: 0;
+            color: var(--text-muted);
+            max-width: 48rem;
+            line-height: 1.85;
+            font-size: 1.04rem;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .nav-link {
+            display: inline-flex;
+            padding: 12px 18px;
+            border-radius: 999px;
+            text-decoration: none;
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.03);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link:focus-visible {
+            background: rgba(108, 33, 20, 0.22);
+            transform: translateY(-1px);
+        }
+
+        .section-title {
+            margin: 0 0 18px;
+            font-size: 1.55rem;
+            letter-spacing: -0.03em;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 10px;
+        }
+
+        .intro-card,
+        .content-card {
+            border-radius: 28px;
+            border: 1px solid var(--border);
+            background: rgba(21, 20, 16, 0.92);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
+            padding: 28px;
+            margin-bottom: 32px;
+        }
+
+        .split-grid {
+            display: grid;
+            gap: 22px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .hero-meta {
+            display: grid;
+            gap: 14px;
+            margin-top: 26px;
+        }
+
+        .hero-meta > div {
+            padding: 18px 20px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .hero-meta strong {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+
+        .hero-meta span {
+            color: var(--gray-56);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .tagline {
+            color: var(--text-muted);
+            border-left: 4px solid var(--red-56);
+            padding-left: 14px;
+            margin-top: 22px;
+            font-style: italic;
+        }
+
+        .color-palette {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .color-chip {
+            min-width: 120px;
+            border-radius: 16px;
+            padding: 18px 16px;
+            display: grid;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .color-swatch {
+            width: 100%;
+            height: 48px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .section {
+            margin-bottom: 42px;
+        }
+
+        .division-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .division-card {
+            padding: 24px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .division-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top right, rgba(108, 33, 20, 0.16), transparent 32%);
+            pointer-events: none;
+        }
+
+        .division-card h3 {
+            margin: 0 0 10px;
+            font-size: 1.35rem;
+        }
+
+        .division-card .leader {
+            font-size: 0.96rem;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+        }
+
+        .division-card p {
+            margin: 0 0 16px;
+            line-height: 1.75;
+            color: var(--text-muted);
+        }
+
+        .division-card strong {
+            color: var(--text-primary);
+        }
+
+        .division-card ul {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .division-card button {
+            margin-top: 14px;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(108, 33, 20, 0.9), rgba(21, 20, 16, 0.96));
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .division-card button:hover,
+        .division-card button:focus-visible {
+            transform: translateY(-1px);
+            background: linear-gradient(135deg, rgba(108, 33, 20, 1), rgba(21, 20, 16, 1));
+        }
+
+        .division-detail {
+            margin-top: 16px;
+            padding: 16px 18px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            display: none;
+        }
+
+        .division-detail.active {
+            display: block;
+        }
+
+        .ranks-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        .rank-card {
+            padding: 22px 24px;
+            background: rgba(21, 20, 16, 0.92);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .rank-card h4 {
+            margin: 0 0 10px;
+            font-size: 1.15rem;
+        }
+
+        .rank-card p {
+            margin: 0;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .rank-note {
+            margin-top: 10px;
+            font-size: 0.96rem;
+            color: var(--gray-56);
+        }
+
+        .rank-filter {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .rank-filter input {
+            flex: 1;
+            min-width: 240px;
+            padding: 14px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-primary);
+        }
+
+        .rank-filter label {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .section-footer {
+            margin-top: 10px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 780px) {
+            header {
+                padding: 18px;
+            }
+
+            .hero-meta {
+                grid-template-columns: 1fr;
+            }
+
+            .division-card,
+            .rank-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <header>
+            <div class="title-block">
+                <span class="badge">56th Siege Battalion</span>
+                <h1>56th Siege Battalion</h1>
+                <p class="lead">A Star Wars clone battalion built for precision, support, and overwhelming force. Explore the battalion structure, seven core divisions, and the rank requirements that hold the 56th together.</p>
+            </div>
+            <nav>
+                <a class="nav-link" href="#divisions">Divisions</a>
+                <a class="nav-link" href="#ranks">Ranks</a>
+                <a class="nav-link" href="#battalion-brief">Battalion Brief</a>
+            </nav>
+        </header>
+
+        <section id="battalion-brief" class="section intro-card">
+            <div class="split-grid">
+                <div>
+                    <h2 class="section-title">Battalion Overview</h2>
+                    <p>The 56th Siege Battalion combines tactical adaptability, heavy firepower, and support excellence. Its divisions are designed to secure victory across ground, air, infil, and combat support.</p>
+                    <p class="tagline">“When the siege begins, the 56th endures until every objective is secured.”</p>
+                </div>
+                <div class="hero-meta">
+                    <div>
+                        <strong>Main Colors</strong>
+                        <span>56th Red, 56th Black, and 56th Gray form the battalion's visual identity across armor, banners, and command displays.</span>
+                    </div>
+                    <div>
+                        <strong>Structure</strong>
+                        <span>7 divisions, specialized command ranks, and active event-based promotion requirements keep the battalion battle-ready.</span>
+                    </div>
+                    <div>
+                        <strong>Command</strong>
+                        <span>Central leadership flows from General to Clone Cadet, with promotions based on event participation, training, and votes.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="color-palette">
+                <div class="color-chip">
+                    <div class="color-swatch" style="background: var(--red-56);"></div>
+                    <div><strong>56th Red</strong></div>
+                    <div>#6c2114</div>
+                </div>
+                <div class="color-chip">
+                    <div class="color-swatch" style="background: var(--black-56);"></div>
+                    <div><strong>56th Black</strong></div>
+                    <div>#151410</div>
+                </div>
+                <div class="color-chip">
+                    <div class="color-swatch" style="background: var(--gray-56);"></div>
+                    <div><strong>56th Gray</strong></div>
+                    <div>#6c6c6c</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="divisions" class="section">
+            <h2 class="section-title">Division Roster</h2>
+            <div class="division-grid">
+                <article class="division-card">
+                    <h3>@21st Griffon Division</h3>
+                    <div class="leader">Led by Alpha ARC Apex</div>
+                    <p>All-around combat force designed to fill gaps on the field. The 21st Griffon is versatile and can deploy nearly any trooper type where they are needed most.</p>
+                    <button type="button">Division Focus</button>
+                    <div class="division-detail">
+                        <strong>Specialty:</strong>
+                        <ul>
+                            <li>Universal deployment</li>
+                            <li>Gap filling in combat</li>
+                            <li>Support for all trooper types</li>
+                            <li>Clone information classes define exceptions</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="division-card">
+                    <h3>@39th Hydra Division</h3>
+                    <div class="leader">Led by Alpha ARC Havoc</div>
+                    <p>Heavy assault and demolition experts. The 39th Hydra brings lethal power with explosives, flame, and elite heavy units to dominate the battlefield.</p>
+                    <button type="button">Division Focus</button>
+                    <div class="division-detail">
+                        <strong>Elite units include:</strong>
+                        <ul>
+                            <li>ARC soldiers</li>
+                            <li>Flametroopers</li>
+                            <li>Demolitionists</li>
+                            <li>Marines and Heavy troopers</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="division-card">
+                    <h3>@89th Wyvern Division</h3>
+                    <div class="leader">Led by Pilots Maverick and Goose</div>
+                    <p>Air and vehicle support wing that controls the skies and launches rapid reinforcements. They keep ground forces supplied and strike from above.</p>
+                    <button type="button">Division Focus</button>
+                    <div class="division-detail">
+                        <strong>Elite units include:</strong>
+                        <ul>
+                            <li>Jet troopers</li>
+                            <li>Vehicle pilots</li>
+                            <li>Clone gunners</li>
+                            <li>Paratroopers</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="division-card">
+                    <h3>@95th Yokai Division</h3>
+                    <div class="leader">Led by Ghillie Trooper "Phantom"</div>
+                    <p>Stealth specialists focused on covert operations, infiltration, and silent takedowns. The 95th operates behind enemy lines with precision and secrecy.</p>
+                    <button type="button">Division Focus</button>
+                    <div class="division-detail">
+                        <strong>Elite units include:</strong>
+                        <ul>
+                            <li>Clone Commandos</li>
+                            <li>Assassin Troopers</li>
+                            <li>Spec Ops units</li>
+                            <li>Blazetroopers</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="division-card">
+                    <h3>@108th Golem Division</h3>
+                    <div class="leader">Led by Alpha ARC Odin</div>
+                    <p>Specialist support division that protects and heals allied forces. The 108th ensures combat sustainability with medics and tactical reinforcements.</p>
+                    <button type="button">Division Focus</button>
+                    <div class="division-detail">
+                        <strong>Elite units include:</strong>
+                        <ul>
+                            <li>EVO Troopers</li>
+                            <li>Medics</li>
+                            <li>Riot Troopers</li>
+                            <li>Warriors and ARF troopers</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="division-card">
+                    <h3>@365th Phoenix Division</h3>
+                    <div class="leader">Led by Desperado Trooper "Flash"</div>
+                    <p>Recon and scouting unit that maps enemy movement and secures ground. The 365th is prepared for land, sea, and reconnaissance operations.</p>
+                    <button type="button">Division Focus</button>
+                    <div class="division-detail">
+                        <strong>Elite units include:</strong>
+                        <ul>
+                            <li>ARF troopers</li>
+                            <li>BARC riders</li>
+                            <li>Ghillies</li>
+                            <li>AT-RT drivers and Scuba troopers</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="division-card">
+                    <h3>@580th Mimic Division</h3>
+                    <div class="leader">No single leader</div>
+                    <p>A coalition of custom and pre-established Star Wars groups finding shelter in the 56th. This division brings outside specialists and allied contingents into the battalion.</p>
+                    <button type="button">Division Focus</button>
+                    <div class="division-detail">
+                        <strong>Groups include:</strong>
+                        <ul>
+                            <li>90th Odins Blessed</li>
+                            <li>Locks Horn Company</li>
+                            <li>88th Serpent Unit</li>
+                            <li>Shattered 104th</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="ranks" class="section content-card">
+            <h2 class="section-title">Rank Requirements</h2>
+            <div class="rank-filter">
+                <label for="rank-search">Filter ranks</label>
+                <input id="rank-search" type="search" placeholder="Search rank name or requirement..." aria-label="Filter ranks" />
+            </div>
+            <div class="ranks-grid" id="ranks-list">
+                <article class="rank-card" data-rank="general">
+                    <h4>@[GEN] General</h4>
+                    <p>1st in command of the battalion.</p>
+                </article>
+                <article class="rank-card" data-rank="marshal commander">
+                    <h4>@[MARC] Marshal Commander</h4>
+                    <p>2nd in command of the battalion. Marshal Commanders can only be voted in by the General.</p>
+                </article>
+                <article class="rank-card" data-rank="colonel">
+                    <h4>@[COL] Colonel</h4>
+                    <p>3rd in command of the battalion. The Colonel can only be voted in by the Marshal Commander and General.</p>
+                </article>
+                <article class="rank-card" data-rank="lieutenant colonel">
+                    <h4>@[LTCOL] Lieutenant Colonel</h4>
+                    <p>4th in command of the battalion. The Lieutenant Colonel can only be voted in by the Colonel, Marshal Commander and General.</p>
+                </article>
+                <article class="rank-card" data-rank="major">
+                    <h4>@[MAJ] Major</h4>
+                    <p>5th in command of the battalion. Major can only be voted in by the Lieutenant Colonel, Colonel, Marshal Commander and General.</p>
+                </article>
+                <article class="rank-card" data-rank="captain">
+                    <h4>@[CPT] Captain</h4>
+                    <p>Attend 50 Battalion events and host 40 Battalion events (combat and recruiting).</p>
+                </article>
+                <article class="rank-card" data-rank="1st lieutenant">
+                    <h4>@[1LT] 1st Lieutenant</h4>
+                    <p>Host 30 Battalion events (combat and recruiting).</p>
+                </article>
+                <article class="rank-card" data-rank="2nd lieutenant">
+                    <h4>@[2LT] 2nd Lieutenant</h4>
+                    <p>Host 20 Battalion events (combat and recruiting).</p>
+                </article>
+                <article class="rank-card" data-rank="chief warrant officer">
+                    <h4>@[Chief Warrant Officer]</h4>
+                    <p>Host 15 Battalion events (combat and recruiting) or co-host 17 events.</p>
+                </article>
+                <article class="rank-card" data-rank="warrant officer">
+                    <h4>@[WO] Warrant Officer</h4>
+                    <p>Host 10 battalion events (combat and recruiting) or co-host 12 events.</p>
+                </article>
+                <article class="rank-card" data-rank="officer">
+                    <h4>@[OF] Officer</h4>
+                    <p>Must be a current NCO and pass the Officer challenge moderated by a High Comm. Passing allows the rank up.</p>
+                </article>
+                <article class="rank-card" data-rank="sergeant major">
+                    <h4>@[SGM] Sergeant Major</h4>
+                    <p>Have an accepted NCO application. Can be promoted from Master Sergeant in nco-application.</p>
+                </article>
+                <article class="rank-card" data-rank="master sergeant">
+                    <h4>@[MSGT] Master Sergeant</h4>
+                    <p>Attend 40 battalion events, attend 3 joint events, and be trained into one Phase 3 classification.</p>
+                </article>
+                <article class="rank-card" data-rank="sergeant first class">
+                    <h4>@[SFC] Sergeant First Class</h4>
+                    <p>Attend 30 Battalion events and attend 2 joint events.</p>
+                </article>
+                <article class="rank-card" data-rank="staff sergeant">
+                    <h4>@[SSGT] Staff Sergeant</h4>
+                    <p>Attend 25 battalion events and attend 1 joint event.</p>
+                </article>
+                <article class="rank-card" data-rank="sergeant">
+                    <h4>@[SGT] Sergeant</h4>
+                    <p>Attend 20 battalion events and be trained into one Phase 2 classification.</p>
+                </article>
+                <article class="rank-card" data-rank="corporal">
+                    <h4>@[CPL] Corporal</h4>
+                    <p>Attend 15 Battalion events.</p>
+                </article>
+                <article class="rank-card" data-rank="lance corporal">
+                    <h4>@[LCPL] Lance Corporal</h4>
+                    <p>Attend 10 Battalion events and be trained into one Phase 1 classification.</p>
+                </article>
+                <article class="rank-card" data-rank="private first class">
+                    <h4>@[PFC] Private First Class</h4>
+                    <p>Attend 5 Battalion events.</p>
+                </article>
+                <article class="rank-card" data-rank="private">
+                    <h4>@[PVT] Private</h4>
+                    <p>Complete bootcamp and attend 1 battalion event.</p>
+                </article>
+                <article class="rank-card" data-rank="clone cadet">
+                    <h4>@[CDT] Clone Cadet</h4>
+                    <p>Be recruited into the 56th.</p>
+                </article>
+            </div>
+            <p class="section-footer">Events do not reset. If you attend 5 division events as PFC and get promoted, you only need to attend 5 more events to rank up to LCPL.</p>
+        </section>
+
+        <footer>
+            <p>56th Siege Battalion — Without honor, Victory is hollow.</p>
+        </footer>
+    </div>
+    <script>
+        const buttons = document.querySelectorAll('.division-card button');
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const detail = button.nextElementSibling;
+                detail.classList.toggle('active');
+                button.textContent = detail.classList.contains('active') ? 'Hide details' : 'Division Focus';
+            });
+        });
+
+        const searchInput = document.getElementById('rank-search');
+        const rankCards = Array.from(document.querySelectorAll('.rank-card'));
+
+        const filterRanks = () => {
+            const query = searchInput.value.trim().toLowerCase();
+            rankCards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(query) ? 'grid' : 'none';
+            });
+        };
+
+        searchInput.addEventListener('input', filterRanks);
+    </script>
+</body>
+</html>
