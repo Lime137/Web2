@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>56th Siege Battalion - Certifications</title>
+    <style>
+        :root {
+            --red-56: #6c2114;
+            --black-56: #151410;
+            --gray-56: #6c6c6c;
+            --text-primary: #f2f2f2;
+            --text-muted: #c7c7c7;
+            --surface: #1f1a1a;
+            --border: rgba(255, 255, 255, 0.08);
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: radial-gradient(circle at top, rgba(108, 33, 20, 0.14), transparent 24%),
+                        linear-gradient(180deg, #0d0c0c 0%, #151410 48%, #0d0c0c 100%);
+            color: var(--text-primary);
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(180deg, transparent 0, transparent 60px, rgba(255,255,255,0.02) 61px, rgba(255,255,255,0.02) 62px);
+            pointer-events: none;
+            opacity: 0.2;
+        }
+
+        .page-shell {
+            position: relative;
+            z-index: 1;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 28px 24px 48px;
+        }
+
+        header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 18px;
+            flex-wrap: wrap;
+            padding: 18px 22px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            background: rgba(21, 20, 16, 0.9);
+            backdrop-filter: blur(14px);
+            margin-bottom: 32px;
+        }
+
+        .title-block {
+            max-width: 640px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: rgba(108, 33, 20, 0.16);
+            border: 1px solid rgba(108, 33, 20, 0.4);
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--red-56);
+            font-size: 0.88rem;
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2.4rem, 4vw, 4rem);
+            letter-spacing: -0.05em;
+            line-height: 1.01;
+        }
+
+        p.lead {
+            margin: 0;
+            color: var(--text-muted);
+            max-width: 48rem;
+            line-height: 1.85;
+            font-size: 1.04rem;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .nav-link {
+            display: inline-flex;
+            padding: 12px 18px;
+            border-radius: 999px;
+            text-decoration: none;
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.03);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link:focus-visible {
+            background: rgba(108, 33, 20, 0.22);
+            transform: translateY(-1px);
+        }
+
+        .section-title {
+            margin: 0 0 18px;
+            font-size: 1.55rem;
+            letter-spacing: -0.03em;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 10px;
+        }
+
+        .content-card {
+            border-radius: 28px;
+            border: 1px solid var(--border);
+            background: rgba(21, 20, 16, 0.92);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
+            padding: 28px;
+            margin-bottom: 32px;
+        }
+
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 18px;
+        }
+
+        .cert-card {
+            padding: 22px 24px;
+            background: rgba(21, 20, 16, 0.92);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .cert-card h4 {
+            margin: 0 0 10px;
+            font-size: 1.15rem;
+        }
+
+        .cert-card p {
+            margin: 0 0 8px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .cert-card .requirements,
+        .cert-card .guns,
+        .cert-card .abilities,
+        .cert-card .divisions {
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .cert-card .requirements strong,
+        .cert-card .guns strong,
+        .cert-card .abilities strong,
+        .cert-card .divisions strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .cert-card .requirements span,
+        .cert-card .guns span,
+        .cert-card .abilities span,
+        .cert-card .divisions span {
+            color: var(--gray-56);
+            font-size: 0.9rem;
+        }
+
+        .phase-header {
+            margin: 40px 0 20px;
+            padding: 16px 0;
+            border-top: 2px solid var(--red-56);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .phase-header h3 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: var(--red-56);
+        }
+
+        .phase-header p {
+            margin: 8px 0 0;
+            color: var(--text-muted);
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 980px) {
+            .page-shell {
+                padding: 24px 18px 40px;
+            }
+
+            .nav-link {
+                min-width: 140px;
+            }
+        }
+
+        @media (max-width: 780px) {
+            .page-shell {
+                padding: 20px 16px 32px;
+            }
+
+            header {
+                padding: 18px 16px;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .nav-link {
+                flex: 1 1 100%;
+                justify-content: center;
+                text-align: center;
+                min-width: 0;
+            }
+
+            .title-block {
+                width: 100%;
+            }
+
+            .certs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cert-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <header>
+            <div class="title-block">
+                <span class="badge">56th Siege Battalion</span>
+                <h1>56th Siege Battalion</h1>
+                <p class="lead">A Star Wars clone battalion built for precision, support, and overwhelming force. Explore the battalion structure, seven core divisions, and the rank requirements that hold the 56th together.</p>
+            </div>
+            <nav>
+                <a class="nav-link" href="56thMain.html">Home</a>
+                <a class="nav-link" href="56thdivisions.html">Divisions</a>
+                <a class="nav-link" href="56thranks.html">Ranks</a>
+                <a class="nav-link" href="56thcerts.html">Certifications</a>
+                <a class="nav-link" href="56thMain.html#battalion-brief">Battalion Brief</a>
+            </nav>
+        </header>
+
+        <section class="content-card">
+            <h2 class="section-title">Certification Phases</h2>
+            <p>Certifications are divided into 5 phases, each representing increasing levels of specialization and expertise. Each certification includes specific requirements, authorized weapons, and special abilities.</p>
+
+            <div class="phase-header">
+                <h3>Phase 1 - Basic Specializations</h3>
+                <p>Entry-level certifications for fundamental combat roles and support positions.</p>
+            </div>
+            <div class="certs-grid">
+                <article class="cert-card">
+                    <h4>Marksman</h4>
+                    <p>Precision shooter specializing in long-range combat.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Heavy</h4>
+                    <p>Heavy weapons specialist for suppressive fire and anti-vehicle combat.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Medic</h4>
+                    <p>Medical specialist providing battlefield healthcare and support.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Paratrooper</h4>
+                    <p>Airborne specialist for high-altitude insertions and aerial combat.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Riot Trooper</h4>
+                    <p>Urban combat specialist for crowd control and close-quarters battle.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>EVO Trooper</h4>
+                    <p>Environmental specialist adapted for extreme conditions.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Engineer</h4>
+                    <p>Technical specialist for repairs, fortifications, and equipment maintenance.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+            </div>
+
+            <div class="phase-header">
+                <h3>Phase 2 - Advanced Specializations</h3>
+                <p>Mid-level certifications requiring specialized training and equipment.</p>
+            </div>
+            <div class="certs-grid">
+                <article class="cert-card">
+                    <h4>Demolition</h4>
+                    <p>Explosives expert for breaching and destruction operations.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Breacher</h4>
+                    <p>Entry specialist for forced access and building clearance.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Spec Ops</h4>
+                    <p>Special operations specialist for covert missions.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Marine</h4>
+                    <p>Naval specialist for amphibious operations and ship-to-ship combat.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Clone Gunner</h4>
+                    <p>Vehicle-mounted weapons specialist for armored support.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Vehicle Pilot</h4>
+                    <p>Ground vehicle operator for transportation and combat support.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Scout Trooper</h4>
+                    <p>Reconnaissance specialist for intelligence gathering and surveillance.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Bomb Squad</h4>
+                    <p>Explosive ordnance disposal specialist for threat neutralization.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Scuba Trooper</h4>
+                    <p>Underwater specialist for aquatic operations and amphibious assaults.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+            </div>
+
+            <div class="phase-header">
+                <h3>Phase 3 - Elite Specializations</h3>
+                <p>High-level certifications for elite units and advanced combat roles.</p>
+            </div>
+            <div class="certs-grid">
+                <article class="cert-card">
+                    <h4>ARC Trooper</h4>
+                    <p>Advanced Recon Commando for independent operations and leadership.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>ARF Trooper</h4>
+                    <p>Airborne Reconnaissance Force specialist for aerial reconnaissance.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>BARC Trooper</h4>
+                    <p>Biker Advanced Recon Commando for high-speed mounted combat.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Clone Commando</h4>
+                    <p>Elite special forces operative for high-risk missions.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Jet Trooper</h4>
+                    <p>Jetpack-equipped specialist for aerial mobility and assault.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>AT-RT Driver</h4>
+                    <p>All-Terrain Recon Transport operator for mobile fire support.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Assassin Trooper</h4>
+                    <p>Stealth operative specializing in targeted eliminations.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Flame Trooper</h4>
+                    <p>Incendiary weapons specialist for area denial and suppression.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+            </div>
+
+            <div class="phase-header">
+                <h3>Phase 4 - Command Specializations</h3>
+                <p>Leadership and specialized command roles requiring extensive experience.</p>
+            </div>
+            <div class="certs-grid">
+                <article class="cert-card">
+                    <h4>Desperado</h4>
+                    <p>Elite sharpshooter and survival specialist.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Ghillie</h4>
+                    <p>Camouflage and stealth specialist for long-term reconnaissance.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Warriors</h4>
+                    <p>Close-quarters combat specialist with enhanced durability.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Blazetrooper</h4>
+                    <p>Advanced incendiary specialist with enhanced fire capabilities.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+            </div>
+
+            <div class="phase-header">
+                <h3>Phase 5 - Legendary Specializations</h3>
+                <p>Ultimate certifications for the most elite and specialized troopers.</p>
+            </div>
+            <div class="certs-grid">
+                <article class="cert-card">
+                    <h4>Alpha ARC</h4>
+                    <p>Supreme Advanced Recon Commando with unmatched combat prowess.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Mando Clone</h4>
+                    <p>Mandalorian-style clone with traditional armor and combat techniques.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+
+                <article class="cert-card">
+                    <h4>Old Republic Trooper</h4>
+                    <p>Historical specialist equipped with ancient Republic technology.</p>
+                    <div class="requirements">
+                        <strong>Requirements:</strong>
+                        <span>[Add requirements here]</span>
+                    </div>
+                    <div class="guns">
+                        <strong>Guns:</strong>
+                        <span>[Add authorized weapons here]</span>
+                    </div>
+                    <div class="abilities">
+                        <strong>Special Abilities:</strong>
+                        <span>[Add special abilities here]</span>
+                    </div>
+                    <div class="divisions">
+                        <strong>Divisions:</strong>
+                        <span>[Add applicable divisions here]</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <footer>
+            <p>56th Siege Battalion — Without honor, Victory is hollow.</p>
+        </footer>
+    </div>
+</body>
+</html>
