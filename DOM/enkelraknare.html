@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="number">0</h1>
+
+    <button id="plusBtn">Plus</button>
+    <button id="minusBtn">Minus</button>
+    <button id="resetBtn">Återställ</button> 
+    
+    <script>
+      let number = 0;
+
+const numberText = document.getElementById("number");
+
+document.getElementById("plusBtn").addEventListener("click", function () {
+    number++;
+    updateNumber();
+});
+
+document.getElementById("minusBtn").addEventListener("click", function () {
+    number--;
+    updateNumber();
+});
+
+document.getElementById("resetBtn").addEventListener("click", function () {
+    number = 0;
+    updateNumber();
+});
+
+function updateNumber() {
+    numberText.textContent = number;
+
+    if (number > 0) {
+        numberText.style.color = "green";
+    } else if (number < 0) {
+        numberText.style.color = "red";
+    } else {
+        numberText.style.color = "black";
+    }
+}
+    </script>       
+</body>
+</html>

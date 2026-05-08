@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .card {
+        width: 100px;
+        height: 100px;
+        background: gray;
+        display: inline-block;
+        margin: 10px;
+    }
+    </style>
+    <div class="card" data-color="red"></div>
+    <div class="card" data-color="red"></div>
+
+    <div class="card" data-color="blue"></div>
+    <div class="card" data-color="blue"></div>
+
+    <p id="score">Poäng: 0</p>
+
+    <script>
+        const cards = document.querySelectorAll(".card");
+
+let firstCard = null;
+let score = 0;
+
+cards.forEach(card => {
+
+    card.addEventListener("click", function () {
+
+        card.style.background = card.dataset.color;
+
+        if (firstCard === null) {
+
+            firstCard = card;
+
+        } else {
+
+            if (firstCard.dataset.color === card.dataset.color &&
+                firstCard !== card) {
+
+                score++;
+
+                document.getElementById("score").textContent =
+                    "Poäng: " + score;
+            }
+
+            firstCard = null;
+        }
+
+    });
+
+});
+    </script>
+</body>
+</html>

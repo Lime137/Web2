@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img id="image" src="stenen.gif" width="300">
+
+    <br>
+
+    <button id="changeBtn">Byt bild</button>
+
+    <script>
+        const image = document.getElementById("image");
+
+document.getElementById("changeBtn").addEventListener("click", function () {
+
+    if (image.src.includes("stenen.gif")) {
+        image.src = "påsen.jpg";
+    } else {
+        image.src = "stenen.gif";
+    }
+
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="word"></h1>
+
+    <input type="text" id="letterInput" maxlength="1">
+
+    <button id="guessBtn">Gissa</button>
+
+    <script>
+        const secretWord = "liam";
+
+let guessedWord = ["_", "_", "_", "_"];
+
+document.getElementById("word").textContent =
+    guessedWord.join(" ");
+
+document.getElementById("guessBtn").addEventListener("click", function () {
+
+    const letter =
+        document.getElementById("letterInput").value;
+
+    for (let i = 0; i < secretWord.length; i++) {
+
+        if (secretWord[i] === letter) {
+            guessedWord[i] = letter;
+        }
+
+    }
+
+    document.getElementById("word").textContent =
+        guessedWord.join(" ");
+
+});
+    </script>
+</body>
+</html>
