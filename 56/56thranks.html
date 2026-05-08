@@ -6,13 +6,14 @@
     <title>56th Siege Battalion - Ranks</title>
     <style>
         :root {
-            --red-56: #6c2114;
-            --black-56: #151410;
-            --gray-56: #6c6c6c;
-            --text-primary: #f2f2f2;
-            --text-muted: #c7c7c7;
-            --surface: #1f1a1a;
+            --red-56: #b33f2c;
+            --black-56: #070707;
+            --gray-56: #9ea3ab;
+            --text-primary: #f7f7f7;
+            --text-muted: #b0b7c1;
+            --surface: #121116;
             --border: rgba(255, 255, 255, 0.08);
+            --surface-strong: rgba(23, 21, 21, 0.95);
             font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
 
@@ -27,18 +28,30 @@
         body {
             margin: 0;
             min-height: 100vh;
-            background: radial-gradient(circle at top, rgba(108, 33, 20, 0.14), transparent 24%),
-                        linear-gradient(180deg, #0d0c0c 0%, #151410 48%, #0d0c0c 100%);
             color: var(--text-primary);
+            background: radial-gradient(circle at top left, rgba(179, 63, 44, 0.16), transparent 20%),
+                        radial-gradient(circle at bottom right, rgba(40, 88, 135, 0.14), transparent 22%),
+                        linear-gradient(180deg, #070707 0%, #101012 42%, #09090a 100%);
+            font-smooth: antialiased;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.04), transparent 38%);
+            opacity: 0.18;
         }
 
         body::after {
             content: "";
             position: fixed;
             inset: 0;
-            background: repeating-linear-gradient(180deg, transparent 0, transparent 60px, rgba(255,255,255,0.02) 61px, rgba(255,255,255,0.02) 62px);
             pointer-events: none;
-            opacity: 0.2;
+            background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 12px 12px;
+            opacity: 0.06;
         }
 
         .page-shell {
@@ -46,21 +59,25 @@
             z-index: 1;
             max-width: 1180px;
             margin: 0 auto;
-            padding: 28px 24px 48px;
+            padding: 36px 30px 48px;
+            background: rgba(10, 9, 10, 0.88);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 36px;
+            box-shadow: 0 50px 120px rgba(0, 0, 0, 0.35);
         }
 
         header {
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            gap: 18px;
+            gap: 22px;
             flex-wrap: wrap;
-            padding: 18px 22px;
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            background: rgba(21, 20, 16, 0.9);
-            backdrop-filter: blur(14px);
-            margin-bottom: 32px;
+            padding: 28px 28px 32px;
+            border-radius: 32px;
+            background: rgba(16, 15, 15, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+            margin-bottom: 40px;
         }
 
         .title-block {
@@ -71,10 +88,10 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 10px 16px;
+            padding: 10px 18px;
             border-radius: 999px;
-            background: rgba(108, 33, 20, 0.16);
-            border: 1px solid rgba(108, 33, 20, 0.4);
+            background: rgba(179, 63, 44, 0.18);
+            border: 1px solid rgba(179, 63, 44, 0.35);
             font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
@@ -83,10 +100,10 @@
         }
 
         h1 {
-            margin: 0 0 12px;
-            font-size: clamp(2.4rem, 4vw, 4rem);
+            margin: 18px 0 16px;
+            font-size: clamp(3rem, 5vw, 5rem);
             letter-spacing: -0.05em;
-            line-height: 1.01;
+            line-height: 1.02;
         }
 
         p.lead {
@@ -94,94 +111,227 @@
             color: var(--text-muted);
             max-width: 48rem;
             line-height: 1.85;
-            font-size: 1.04rem;
+            font-size: 1.05rem;
         }
 
         nav {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 14px;
         }
 
         .nav-link {
             display: inline-flex;
-            padding: 12px 18px;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+            padding: 12px 20px;
             border-radius: 999px;
             text-decoration: none;
             color: var(--text-primary);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.03);
-            transition: transform 0.2s ease, background-color 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.04);
+            transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
         }
 
         .nav-link:hover,
         .nav-link:focus-visible {
-            background: rgba(108, 33, 20, 0.22);
+            background: rgba(255, 255, 255, 0.1);
             transform: translateY(-1px);
+            box-shadow: 0 18px 28px rgba(0, 0, 0, 0.12);
+        }
+
+        .nav-link.active {
+            background: rgba(179, 63, 44, 0.95);
+            border-color: rgba(255, 255, 255, 0.18);
+            color: #fff;
+            box-shadow: 0 20px 30px rgba(179, 63, 44, 0.18);
         }
 
         .section-title {
-            margin: 0 0 18px;
-            font-size: 1.55rem;
+            margin: 0 0 24px;
+            font-size: 1.75rem;
             letter-spacing: -0.03em;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 10px;
+            padding-bottom: 14px;
         }
 
-        .content-card {
+        .intro-card,
+        .content-card,
+        .division-card,
+        .rank-card,
+        .cert-card {
             border-radius: 28px;
-            border: 1px solid var(--border);
-            background: rgba(21, 20, 16, 0.92);
-            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
-            padding: 28px;
-            margin-bottom: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(18, 17, 17, 0.94);
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
         }
 
-        .ranks-grid {
+        .intro-card,
+        .content-card {
+            padding: 32px;
+            margin-bottom: 40px;
+        }
+
+        .split-grid,
+        .division-grid,
+        .certs-grid {
             display: grid;
-            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .split-grid {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .hero-meta {
+            display: grid;
             gap: 18px;
+            margin-top: 26px;
         }
 
-        .rank-card {
-            padding: 22px 24px;
-            background: rgba(21, 20, 16, 0.92);
-            border-radius: 20px;
-            border: 1px solid var(--border);
+        .hero-meta > div {
+            padding: 20px 22px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        .rank-card h4 {
-            margin: 0 0 10px;
-            font-size: 1.15rem;
+        .hero-meta strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-primary);
         }
 
-        .rank-card p {
-            margin: 0;
-            color: var(--text-muted);
-            line-height: 1.7;
-        }
-
-        .rank-note {
-            margin-top: 10px;
-            font-size: 0.96rem;
+        .hero-meta span,
+        .division-card p,
+        .rank-card p,
+        .cert-card p,
+        .division-card li,
+        .rank-filter label,
+        .section-footer,
+        .cert-card .requirements span,
+        .cert-card .guns span,
+        .cert-card .abilities span,
+        .cert-card .divisions span {
             color: var(--gray-56);
+        }
+
+        .tagline {
+            color: var(--text-muted);
+            border-left: 4px solid var(--red-56);
+            padding-left: 14px;
+            margin-top: 24px;
+            font-style: italic;
+        }
+
+        .color-palette {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .color-chip {
+            min-width: 140px;
+            border-radius: 18px;
+            padding: 18px 16px;
+            display: grid;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .color-swatch {
+            width: 100%;
+            height: 52px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .division-logo,
+        .hero-logo {
+            display: block;
+            width: 92px;
+            max-width: 100%;
+            margin-bottom: 20px;
+            border-radius: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.16);
+        }
+
+        .division-card h3,
+        .cert-card h4,
+        .rank-card h4 {
+            margin: 0 0 12px;
+            font-size: 1.4rem;
+        }
+
+        .division-card .leader {
+            font-size: 0.96rem;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+        }
+
+        .division-card p,
+        .cert-card p,
+        .rank-card p {
+            margin: 0 0 16px;
+            line-height: 1.75;
+        }
+
+        .division-card ul,
+        .cert-card .requirements,
+        .cert-card .guns,
+        .cert-card .abilities,
+        .cert-card .divisions {
+            margin: 0;
+            padding-left: 18px;
+            line-height: 1.75;
+        }
+
+        .division-card button,
+        .nav-link {
+            transition: all 0.25s ease;
+        }
+
+        .division-card button {
+            margin-top: 18px;
+            padding: 14px 22px;
+            border: none;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(179, 63, 44, 0.92), rgba(18, 17, 17, 0.96));
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .division-card button:hover,
+        .division-card button:focus-visible {
+            transform: translateY(-1px);
+            background: linear-gradient(135deg, rgba(193, 79, 47, 1), rgba(18, 17, 17, 1));
+        }
+
+        .rank-card,
+        .cert-card {
+            padding: 28px;
         }
 
         .rank-filter {
             display: flex;
-            gap: 12px;
+            gap: 14px;
             flex-wrap: wrap;
             align-items: center;
-            margin-bottom: 18px;
+            margin-bottom: 24px;
         }
 
         .rank-filter input {
             flex: 1;
-            min-width: 240px;
-            padding: 14px 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.04);
+            min-width: 260px;
+            padding: 15px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.05);
             color: var(--text-primary);
         }
 
@@ -191,22 +341,22 @@
         }
 
         .section-footer {
-            margin-top: 10px;
+            margin-top: 18px;
             color: var(--text-muted);
             font-size: 0.95rem;
-            line-height: 1.7;
+            line-height: 1.75;
         }
 
         footer {
             text-align: center;
             color: var(--text-muted);
             font-size: 0.95rem;
-            margin-top: 40px;
+            margin-top: 44px;
         }
 
         @media (max-width: 980px) {
             .page-shell {
-                padding: 24px 18px 40px;
+                padding: 28px 20px 40px;
             }
 
             .nav-link {
@@ -216,11 +366,11 @@
 
         @media (max-width: 780px) {
             .page-shell {
-                padding: 20px 16px 32px;
+                padding: 24px 16px 32px;
             }
 
             header {
-                padding: 18px 16px;
+                padding: 20px 18px;
             }
 
             nav {
@@ -235,8 +385,22 @@
                 min-width: 0;
             }
 
-            .title-block {
+            .hero-meta,
+            .split-grid,
+            .certs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .division-grid,
+            .rank-card,
+            .cert-card {
                 width: 100%;
+            }
+
+            .division-card,
+            .rank-card,
+            .cert-card {
+                padding: 24px;
             }
 
             .rank-filter {
@@ -245,10 +409,10 @@
             }
 
             .rank-filter input {
-                min-width: 0;
                 width: 100%;
             }
         }
+
     </style>
 </head>
 <body>
