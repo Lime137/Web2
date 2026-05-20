@@ -335,9 +335,35 @@
             color: var(--text-primary);
         }
 
+        .rank-filter button {
+            padding: 14px 20px;
+            border-radius: 999px;
+            border: none;
+            background: linear-gradient(135deg, rgba(179, 63, 44, 0.92), rgba(18, 17, 17, 0.96));
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .rank-filter button:hover,
+        .rank-filter button:focus-visible {
+            transform: translateY(-1px);
+            background: linear-gradient(135deg, rgba(193, 79, 47, 1), rgba(18, 17, 17, 1));
+        }
+
         .rank-filter label {
             font-size: 0.95rem;
             color: var(--text-muted);
+        }
+
+        .rank-card.selected {
+            border-color: rgba(179, 63, 44, 0.9);
+            box-shadow: 0 0 0 2px rgba(179, 63, 44, 0.18);
+        }
+
+        .status-message {
+            color: var(--text-muted);
+            font-size: 0.95rem;
         }
 
         .section-footer {
@@ -437,6 +463,8 @@
             <div class="rank-filter">
                 <label for="rank-search">Filter ranks</label>
                 <input id="rank-search" type="search" placeholder="Search rank name or requirement..." aria-label="Filter ranks" />
+                <button id="random-rank" type="button">Find a Rank</button>
+                <span class="status-message">Ready to locate your next promotion.</span>
             </div>
             <div class="ranks-grid" id="ranks-list">
                 <article class="rank-card" data-rank="general">
@@ -532,18 +560,77 @@
         </footer>
     </div>
     <script>
+        const navLinks = document.querySelectorAll('nav a');
+        const currentPage = window.location.pathname.split('/').pop();
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+
         const searchInput = document.getElementById('rank-search');
         const rankCards = Array.from(document.querySelectorAll('.rank-card'));
+        const randomRankButton = document.getElementById('random-rank');
+        const statusMessage = document.querySelector('.status-message');
+
+        const updateStatus = () => {
+            const visible = rankCards.filter(card => card.style.display !== 'none').length;
+            statusMessage.textContent = `Showing ${visible} of ${rankCards.length} ranks.`;
+        };
 
         const filterRanks = () => {
             const query = searchInput.value.trim().toLowerCase();
+            localStorage.setItem('rankSearch', query);
             rankCards.forEach(card => {
                 const text = card.textContent.toLowerCase();
-                card.style.display = text.includes(query) ? 'grid' : 'none';
+                const match = text.includes(query);
+                card.style.display = match ? 'grid' : 'none';
+                if (!match) card.classList.remove('selected');
             });
+            updateStatus();
         };
 
+        const selectRank = (card) => {
+            rankCards.forEach(item => item.classList.remove('selected'));
+            card.classList.add('selected');
+            const rankName = card.querySelector('h4')?.textContent || 'Rank';
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(rankName).then(() => {
+                    statusMessage.textContent = `Copied ${rankName} to clipboard.`;
+                }).catch(() => {
+                    statusMessage.textContent = `${rankName} selected.`;
+                });
+            } else {
+                statusMessage.textContent = `${rankName} selected.`;
+            }
+        };
+
+        rankCards.forEach(card => {
+            card.tabIndex = 0;
+            card.addEventListener('click', () => selectRank(card));
+            card.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    selectRank(card);
+                }
+            });
+        });
+
+        randomRankButton.addEventListener('click', () => {
+            const visibleCards = rankCards.filter(card => card.style.display !== 'none');
+            if (!visibleCards.length) return;
+            const randomCard = visibleCards[Math.floor(Math.random() * visibleCards.length)];
+            randomCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            selectRank(randomCard);
+        });
+
         searchInput.addEventListener('input', filterRanks);
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedQuery = localStorage.getItem('rankSearch') || '';
+            searchInput.value = savedQuery;
+            filterRanks();
+        });
     </script>
 </body>
 </html></content>

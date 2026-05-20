@@ -120,6 +120,12 @@
             transform: translateY(-1px);
         }
 
+        .nav-link.active {
+            background: rgba(108, 33, 20, 0.9);
+            color: #fff;
+            border-color: rgba(108, 33, 20, 0.9);
+        }
+
         .section-title {
             margin: 0 0 18px;
             font-size: 1.55rem;
@@ -137,6 +143,46 @@
             gap: 20px;
         }
 
+        .division-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .division-controls input {
+            flex: 1 1 320px;
+            min-width: 220px;
+            padding: 14px 16px;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        .division-controls button {
+            padding: 12px 18px;
+            border: none;
+            border-radius: 999px;
+            background: rgba(108, 33, 20, 0.18);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .division-controls button:hover,
+        .division-controls button:focus-visible {
+            background: rgba(108, 33, 20, 0.36);
+            transform: translateY(-1px);
+        }
+
+        .status-message {
+            margin: 0 0 18px;
+            color: var(--text-muted);
+            font-size: 0.98rem;
+        }
+
         .division-card {
             padding: 24px;
             border-radius: 24px;
@@ -144,6 +190,17 @@
             background: rgba(255, 255, 255, 0.03);
             position: relative;
             overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .division-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 24px 40px rgba(0, 0, 0, 0.18);
+        }
+
+        .division-card.featured {
+            border-color: rgba(108, 33, 20, 0.9);
+            box-shadow: 0 0 0 2px rgba(108, 33, 20, 0.25);
         }
 
         .division-card::before {
@@ -281,7 +338,7 @@
             <div class="title-block">
                 <span class="badge">56th Siege Battalion</span>
                 <h1>56th Siege Battalion</h1>
-                <p class="lead">A Star Wars clone battalion built for precision, support, and overwhelming force. Explore the battalion structure, seven core divisions, and the rank requirements that hold the 56th together.</p>
+                <p class="lead">A Star Wars clone battalion built for precision, support, and overwhelming force. Explore the battalion structure, specialized divisions, and the rank requirements that hold the 56th together.</p>
             </div>
             <nav>
                 <a class="nav-link" href="56thMain.html">Home</a>
@@ -294,20 +351,34 @@
 
         <section id="divisions" class="section">
             <h2 class="section-title">Division Roster</h2>
+            <p class="lead">Inside the 56th we operate across our specialized divisions with heavy multiclassing and a dynamic slot system. For the complete list of division classes, check Phase 1–5 class channels under Ranks and Classifications. The <strong>class-info</strong> channel explains how the slot system works for multiclassing.</p>
+            <div class="division-controls">
+                <input id="division-search" type="search" placeholder="Search divisions by name, specialty, or unit..." aria-label="Search divisions" />
+                <button id="expand-all" type="button">Expand All</button>
+                <button id="collapse-all" type="button">Collapse All</button>
+                <button id="random-division" type="button">Random Division</button>
+            </div>
+            <p class="status-message">Showing 9 of 9 divisions.</p>
             <div class="division-grid">
                 <article class="division-card">
                     <img class="division-logo" src="griffon_logo.png" alt="21st Griffon Division logo" />
                     <h3>21st Griffon Division</h3>
-                    <div class="leader">Led by Alpha ARC Apex</div>
-                    <p>All-around combat force designed to fill gaps on the field. The 21st Griffon is versatile and can deploy nearly any trooper type where they are needed most.</p>
+                    <div class="leader">Led by 1st in command, Alpha ARC “Apex”</div>
+                    <p>The Special Forces division of the 56th. Griffon emphasizes weapon expertise, battlefield knowledge, and flexible leadership to win in any environment.</p>
                     <button type="button">Division Focus</button>
                     <div class="division-detail">
                         <strong>Specialty:</strong>
                         <ul>
-                            <li>Universal deployment</li>
-                            <li>Gap filling in combat</li>
-                            <li>Support for all trooper types</li>
-                            <li>Clone information classes define exceptions</li>
+                            <li>Heavy</li>
+                            <li>EVO Troopers</li>
+                            <li>Comms Troopers</li>
+                            <li>Marines</li>
+                            <li>Pilots</li>
+                            <li>Commandos</li>
+                            <li>Assassin Troopers</li>
+                            <li>Desperados</li>
+                            <li>Ghillies</li>
+                            <li>Warriors</li>
                         </ul>
                     </div>
                 </article>
@@ -315,16 +386,23 @@
                 <article class="division-card">
                     <img class="division-logo" src="Hydra_Logo.png" alt="39th Hydra Division logo" />
                     <h3>39th Hydra Division</h3>
-                    <div class="leader">Led by Alpha ARC Havoc</div>
-                    <p>Heavy assault and demolition experts. The 39th Hydra brings lethal power with explosives, flame, and elite heavy units to dominate the battlefield.</p>
+                    <div class="leader">Led by 2nd in command, Alpha ARC “Havoc”</div>
+                    <p>The Heavy Assault division. Hydra is built to tear through defenses with overwhelming firepower, demolitions, and relentless pressure.</p>
                     <button type="button">Division Focus</button>
                     <div class="division-detail">
-                        <strong>Elite units include:</strong>
+                        <strong>Specialty:</strong>
                         <ul>
-                            <li>ARC soldiers</li>
+                            <li>Heavy</li>
+                            <li>EVO Troopers</li>
+                            <li>Demolition</li>
+                            <li>Breacher</li>
+                            <li>Bomb Squad</li>
+                            <li>Marines</li>
                             <li>Flametroopers</li>
-                            <li>Demolitionists</li>
-                            <li>Marines and Heavy troopers</li>
+                            <li>Sentinels</li>
+                            <li>Blazetroopers</li>
+                            <li>Siege Troopers</li>
+                            <li>Bunker Busters</li>
                         </ul>
                     </div>
                 </article>
@@ -332,16 +410,19 @@
                 <article class="division-card">
                     <img class="division-logo" src="wyvern_Logo.png" alt="89th Wyvern Division logo" />
                     <h3>89th Wyvern Division</h3>
-                    <div class="leader">Led by Pilots Maverick and Goose</div>
-                    <p>Air and vehicle support wing that controls the skies and launches rapid reinforcements. They keep ground forces supplied and strike from above.</p>
+                    <div class="leader">Led by JET Trooper “Maverick”</div>
+                    <p>The Heavy Vehicle Support division. Wyvern provides air and large vehicle support, striking from above and breaking enemy lines with heavy armor.</p>
                     <button type="button">Division Focus</button>
                     <div class="division-detail">
-                        <strong>Elite units include:</strong>
+                        <strong>Specialty:</strong>
                         <ul>
-                            <li>Jet troopers</li>
-                            <li>Vehicle pilots</li>
-                            <li>Clone gunners</li>
-                            <li>Paratroopers</li>
+                            <li>Paratrooper</li>
+                            <li>Pilot</li>
+                            <li>Clone Gunner</li>
+                            <li>JET Trooper</li>
+                            <li>Sentinel</li>
+                            <li>Desperado</li>
+                            <li>Designator</li>
                         </ul>
                     </div>
                 </article>
@@ -349,16 +430,22 @@
                 <article class="division-card">
                     <img class="division-logo" src="Yokai_Logo.png" alt="95th Yokai Division logo" />
                     <h3>95th Yokai Division</h3>
-                    <div class="leader">Led by Ghillie Trooper "Phantom"</div>
-                    <p>Stealth specialists focused on covert operations, infiltration, and silent takedowns. The 95th operates behind enemy lines with precision and secrecy.</p>
+                    <div class="leader">Led by Ghillie Trooper “Phantom”</div>
+                    <p>The Covert Ops and Stealth division. Yokai thrives in darkness, specializing in silent infiltration, data extraction, and high-risk covert missions.</p>
                     <button type="button">Division Focus</button>
                     <div class="division-detail">
-                        <strong>Elite units include:</strong>
+                        <strong>Specialty:</strong>
                         <ul>
-                            <li>Clone Commandos</li>
-                            <li>Assassin Troopers</li>
-                            <li>Spec Ops units</li>
+                            <li>Marksman</li>
+                            <li>Medics</li>
+                            <li>Breacher</li>
+                            <li>Spec Ops</li>
+                            <li>Commando</li>
+                            <li>Assassin Trooper</li>
+                            <li>Ghillie</li>
                             <li>Blazetroopers</li>
+                            <li>Warp Troopers</li>
+                            <li>Cloakers</li>
                         </ul>
                     </div>
                 </article>
@@ -366,16 +453,21 @@
                 <article class="division-card">
                     <img class="division-logo" src="golem_logo.png" alt="108th Golem Division logo" />
                     <h3>108th Golem Division</h3>
-                    <div class="leader">Led by Alpha ARC Odin</div>
-                    <p>Specialist support division that protects and heals allied forces. The 108th ensures combat sustainability with medics and tactical reinforcements.</p>
+                    <div class="leader">Led by 3rd in command, Alpha ARC “Odin”</div>
+                    <p>The Frontal Defense division. Golem holds the line with sturdy troopers trained in CQC, shields, shotguns, and heavy weapons.</p>
                     <button type="button">Division Focus</button>
                     <div class="division-detail">
-                        <strong>Elite units include:</strong>
+                        <strong>Specialty:</strong>
                         <ul>
-                            <li>EVO Troopers</li>
-                            <li>Medics</li>
                             <li>Riot Troopers</li>
-                            <li>Warriors and ARF troopers</li>
+                            <li>Engineers</li>
+                            <li>Demolition</li>
+                            <li>Scout Troopers</li>
+                            <li>ARF Troopers</li>
+                            <li>Sentinels</li>
+                            <li>Warriors</li>
+                            <li>Siege Troopers</li>
+                            <li>Bunker Busters</li>
                         </ul>
                     </div>
                 </article>
@@ -383,16 +475,71 @@
                 <article class="division-card">
                     <img class="division-logo" src="phoenix_logo.png" alt="365th Phoenix Division logo" />
                     <h3>365th Phoenix Division</h3>
-                    <div class="leader">Led by Desperado Trooper "Flash"</div>
-                    <p>Recon and scouting unit that maps enemy movement and secures ground. The 365th is prepared for land, sea, and reconnaissance operations.</p>
+                    <div class="leader">Led by BARC Trooper “Banshee”</div>
+                    <p>The Scouting and Recon division. Phoenix specializes in recon, blitz maneuvers, and tactical support for frontline units.</p>
                     <button type="button">Division Focus</button>
                     <div class="division-detail">
-                        <strong>Elite units include:</strong>
+                        <strong>Specialty:</strong>
                         <ul>
-                            <li>ARF troopers</li>
-                            <li>BARC riders</li>
+                            <li>Marksman</li>
+                            <li>Medics</li>
+                            <li>Comms Troopers</li>
+                            <li>Scout Troopers</li>
+                            <li>Scuba Troopers</li>
+                            <li>ARF Troopers</li>
+                            <li>BARC Troopers</li>
+                            <li>AT-RT Drivers</li>
                             <li>Ghillies</li>
-                            <li>AT-RT drivers and Scuba troopers</li>
+                            <li>Drone Operators</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="division-card">
+                    <img class="division-logo" src="766th_Gaia_Division_Logo.png" alt="766th Gaia Division logo" />
+                    <h3>766th Gaia Division</h3>
+                    <div class="leader">Led by 5th in command, Warrior “Astro”</div>
+                    <p>The Healing Support division. Gaia provides medical support, field defense, and rescue operations to keep the battalion fighting.</p>
+                    <button type="button">Division Focus</button>
+                    <div class="division-detail">
+                        <strong>Specialty:</strong>
+                        <ul>
+                            <li>Marksman</li>
+                            <li>Medics</li>
+                            <li>Engineers</li>
+                            <li>Comms Troopers</li>
+                            <li>Scuba Troopers</li>
+                            <li>Menders</li>
+                            <li>ARF Troopers</li>
+                            <li>Doctors</li>
+                            <li>Drone Operators</li>
+                            <li>Designators</li>
+                            <li>Warp Troopers</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="division-card">
+                    <img class="division-logo" src="218th_Kitsune_Division_Logo.png" alt="218th Kitsune Division logo" />
+                    <h3>218th Kitsune Division</h3>
+                    <div class="leader">Led by 4th in command, Alpha ARC “Raven”</div>
+                    <p>The Info Gathering division. Kitsune combines recon, drone support, and light medical assistance to keep the battalion aware and prepared.</p>
+                    <button type="button">Division Focus</button>
+                    <div class="division-detail">
+                        <strong>Specialty:</strong>
+                        <ul>
+                            <li>Medics</li>
+                            <li>Engineers</li>
+                            <li>Comms Troopers</li>
+                            <li>Spec Ops</li>
+                            <li>Scout Troopers</li>
+                            <li>Scuba Troopers</li>
+                            <li>Menders</li>
+                            <li>ARF Troopers</li>
+                            <li>Drone Operators</li>
+                            <li>Ghillies</li>
+                            <li>Warp Troopers</li>
+                            <li>Cloakers</li>
                         </ul>
                     </div>
                 </article>
@@ -401,15 +548,15 @@
                     <img class="division-logo" src="mimic_logo.png" alt="580th Mimic Division logo" />
                     <h3>580th Mimic Division</h3>
                     <div class="leader">No single leader</div>
-                    <p>A coalition of custom and pre-established Star Wars groups finding shelter in the 56th. This division brings outside specialists and allied contingents into the battalion.</p>
+                    <p>The Mimic division is the most flexible 56th entry. It allows allied groups to join the battalion, earn rank, and operate with less strict 56th classification requirements.</p>
                     <button type="button">Division Focus</button>
                     <div class="division-detail">
-                        <strong>Groups include:</strong>
+                        <strong>Division notes:</strong>
                         <ul>
-                            <li>90th Odins Blessed</li>
-                            <li>Locks Horn Company</li>
-                            <li>88th Serpent Unit</li>
-                            <li>Shattered 104th</li>
+                            <li>No 56th custom classes allowed</li>
+                            <li>Members can earn rank inside the 56th</li>
+                            <li>Structure follows the original allied group classes</li>
+                            <li>Designed for temporary allies and supporting groups</li>
                         </ul>
                     </div>
                 </article>
@@ -421,14 +568,96 @@
         </footer>
     </div>
     <script>
+        const navLinks = document.querySelectorAll('nav a');
+        const currentPage = window.location.pathname.split('/').pop();
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+
+        const divisionCards = Array.from(document.querySelectorAll('.division-card'));
+        const searchInput = document.getElementById('division-search');
+        const statusMessage = document.querySelector('.status-message');
+        const expandAllButton = document.getElementById('expand-all');
+        const collapseAllButton = document.getElementById('collapse-all');
+        const randomButton = document.getElementById('random-division');
         const buttons = document.querySelectorAll('.division-card button');
+
+        const updateStatus = () => {
+            const visible = divisionCards.filter(card => card.style.display !== 'none').length;
+            statusMessage.textContent = `Showing ${visible} of ${divisionCards.length} divisions.`;
+        };
+
+        const toggleDetail = (card, show) => {
+            const button = card.querySelector('button');
+            const detail = card.querySelector('.division-detail');
+            if (!button || !detail) return;
+            const active = show === undefined ? !detail.classList.contains('active') : show;
+            detail.classList.toggle('active', active);
+            button.textContent = active ? 'Hide details' : 'Division Focus';
+        };
+
+        const filterDivisions = () => {
+            const query = searchInput.value.trim().toLowerCase();
+            localStorage.setItem('divisionSearch', query);
+            divisionCards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                const match = text.includes(query);
+                card.style.display = match ? 'grid' : 'none';
+            });
+            updateStatus();
+        };
+
         buttons.forEach(button => {
-            button.addEventListener('click', () => {
+            button.addEventListener('click', event => {
+                event.stopPropagation();
                 const detail = button.nextElementSibling;
                 detail.classList.toggle('active');
                 button.textContent = detail.classList.contains('active') ? 'Hide details' : 'Division Focus';
             });
         });
+
+        divisionCards.forEach(card => {
+            card.addEventListener('click', event => {
+                if (event.target.closest('button')) return;
+                toggleDetail(card);
+            });
+            card.addEventListener('keypress', event => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    toggleDetail(card);
+                }
+            });
+            card.tabIndex = 0;
+        });
+
+        expandAllButton.addEventListener('click', () => {
+            divisionCards.forEach(card => toggleDetail(card, true));
+        });
+
+        collapseAllButton.addEventListener('click', () => {
+            divisionCards.forEach(card => toggleDetail(card, false));
+        });
+
+        randomButton.addEventListener('click', () => {
+            const visibleCards = divisionCards.filter(card => card.style.display !== 'none');
+            if (!visibleCards.length) return;
+            const randomCard = visibleCards[Math.floor(Math.random() * visibleCards.length)];
+            divisionCards.forEach(card => card.classList.remove('featured'));
+            randomCard.classList.add('featured');
+            randomCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        searchInput.addEventListener('input', filterDivisions);
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedQuery = localStorage.getItem('divisionSearch') || '';
+            searchInput.value = savedQuery;
+            filterDivisions();
+        });
+
+        updateStatus();
     </script>
 </body>
 </html></content>

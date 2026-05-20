@@ -178,12 +178,51 @@
             line-height: 1.5;
         }
 
+        .nav-link.active {
+            background: rgba(108, 33, 20, 0.9);
+            color: #fff;
+            border-color: rgba(108, 33, 20, 0.9);
+        }
+
         .tagline {
             color: var(--text-muted);
             border-left: 4px solid var(--red-56);
             padding-left: 14px;
             margin-top: 22px;
             font-style: italic;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .hero-actions button {
+            padding: 14px 20px;
+            border: none;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(108, 33, 20, 0.95), rgba(21, 20, 16, 0.96));
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .hero-actions button:hover,
+        .hero-actions button:focus-visible {
+            transform: translateY(-1px);
+            background: linear-gradient(135deg, rgba(193, 79, 47, 1), rgba(21, 20, 16, 1));
+        }
+
+        .hero-status {
+            margin-top: 18px;
+            padding: 18px 20px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-muted);
         }
 
         .color-palette {
@@ -265,7 +304,7 @@
                 <img class="hero-logo" src="56th_battalion_logo_New.png" alt="56th Siege Battalion logo" />
                 <span class="badge">56th Siege Battalion</span>
                 <h1>56th Siege Battalion</h1>
-                <p class="lead">A Star Wars clone battalion built for precision, support, and overwhelming force. Explore the battalion structure, seven core divisions, and the rank requirements that hold the 56th together.</p>
+                <p class="lead">A Star Wars clone battalion built for precision, support, and overwhelming force. Explore the battalion structure, nine core divisions, and the rank requirements that hold the 56th together.</p>
             </div>
             <nav>
                 <a class="nav-link" href="56thdivisions.html">Divisions</a>
@@ -281,6 +320,12 @@
                     <h2 class="section-title">Battalion Overview</h2>
                     <p>The 56th Siege Battalion combines tactical adaptability, heavy firepower, and support excellence. Its divisions are designed to secure victory across ground, air, infil, and combat support.</p>
                     <p class="tagline">“When the siege begins, the 56th endures until every objective is secured.”</p>
+                    <div class="hero-actions">
+                        <button id="hero-quote" type="button">Inspire the Battalion</button>
+                        <button id="show-division" type="button">Highlight a Division</button>
+                        <button id="toggle-theme" type="button">Warm Theme</button>
+                    </div>
+                    <div class="hero-status" id="hero-status">Ready for deployment. Tap a button to engage battalion systems.</div>
                 </div>
                 <div class="hero-meta">
                     <div>
@@ -289,7 +334,7 @@
                     </div>
                     <div>
                         <strong>Structure</strong>
-                        <span>7 divisions, specialized command ranks, and active event-based promotion requirements keep the battalion battle-ready.</span>
+                        <span>9 divisions, specialized command ranks, and active event-based promotion requirements keep the battalion battle-ready.</span>
                     </div>
                     <div>
                         <strong>Command</strong>
@@ -320,5 +365,89 @@
             <p>56th Siege Battalion — Without honor, Victory is hollow.</p>
         </footer>
     </div>
+    <script>
+        const navLinks = document.querySelectorAll('nav a');
+        const currentPage = window.location.pathname.split('/').pop();
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+
+        const quotes = [
+            '“Victory is earned by those who never stop moving forward.”',
+            '“A secure siege begins with discipline and teamwork.”',
+            '“In the 56th, every division is the decisive edge.”',
+            '“Preparedness is the perfect shield in any theater.”',
+            '“From the frontlines to support, the 56th stands unbreakable.”',
+            '“When the siege begins, the 56th endures until every objective is secured”',   
+            '“Adapt, overcome, and strike with precision—that is the 56th way.”',
+            '“In the heat of battle, the 56th’s resolve is our greatest weapon.”',
+            '“Each division is a pillar of strength; together, we are an unstoppable force.”',
+            '“Through relentless training and unwavering loyalty, the 56th Siege Battalion achieves the impossible.”',
+            '“Every member of the 56th is a vital link in the chain of victory.”',
+            '“The 56th Siege Battalion is not just a force; it’s a family forged in the crucible of combat.”',
+            '“Siege warfare demands patience, precision, and unyielding spirit—qualities the 56th embodies in every operation.”',
+            '“In the 56th, we don’t just fight for victory; we fight for each other, knowing that our strength lies in our unity.”',
+            '“The 56th Siege Battalion is a testament to the power of resilience, strategy, and camaraderie in the face of overwhelming odds.”',
+            '“No Fear, No Hate, No Anger, No Despair. The 56th Siege Battalion endures beyond the battlefield, united by honor and loyalty.”'
+        ];
+
+        const divisions = [
+            '21st Griffon',
+            '39th Hydra',
+            '89th Wyvern',
+            '95th Yokai',
+            '108th Golem',
+            '365th Phoenix',
+            '766th Gaia',
+            '218th Kitsune',
+            '580th Mimic'
+        ];
+
+        const heroStatus = document.getElementById('hero-status');
+        const heroQuoteButton = document.getElementById('hero-quote');
+        const showDivisionButton = document.getElementById('show-division');
+        const toggleThemeButton = document.getElementById('toggle-theme');
+
+        const setTheme = (mode) => {
+            const root = document.documentElement;
+            if (mode === 'warm') {
+                root.style.setProperty('--red-56', '#b0472e');
+                root.style.setProperty('--black-56', '#1d1411');
+                root.style.setProperty('--gray-56', '#a18f7d');
+                toggleThemeButton.textContent = 'Dark Theme';
+                heroStatus.textContent = 'Warm theme engaged. Tactical glow is active.';
+                localStorage.setItem('battalionTheme', 'warm');
+                return;
+            }
+            root.style.setProperty('--red-56', '#6c2114');
+            root.style.setProperty('--black-56', '#151410');
+            root.style.setProperty('--gray-56', '#6c6c6c');
+            toggleThemeButton.textContent = 'Warm Theme';
+            heroStatus.textContent = 'Dark theme restored. Systems are stable.';
+            localStorage.setItem('battalionTheme', 'dark');
+        };
+
+        heroQuoteButton.addEventListener('click', () => {
+            const quote = quotes[Math.floor(Math.random() * quotes.length)];
+            heroStatus.textContent = quote;
+        });
+
+        showDivisionButton.addEventListener('click', () => {
+            const division = divisions[Math.floor(Math.random() * divisions.length)];
+            heroStatus.textContent = `Deploying spotlight to ${division} Division.`;
+        });
+
+        toggleThemeButton.addEventListener('click', () => {
+            const current = localStorage.getItem('battalionTheme') || 'dark';
+            setTheme(current === 'dark' ? 'warm' : 'dark');
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('battalionTheme') || 'dark';
+            setTheme(savedTheme);
+        });
+    </script>
 </body>
 </html>

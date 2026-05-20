@@ -207,6 +207,57 @@
             color: var(--text-muted);
         }
 
+        .nav-link.active {
+            background: rgba(108, 33, 20, 0.9);
+            color: #fff;
+            border-color: rgba(108, 33, 20, 0.9);
+        }
+
+        .cert-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .cert-controls input {
+            flex: 1;
+            min-width: 240px;
+            padding: 14px 18px;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        .cert-controls button {
+            padding: 14px 20px;
+            border-radius: 999px;
+            border: none;
+            background: linear-gradient(135deg, rgba(108, 33, 20, 0.9), rgba(21, 20, 16, 0.96));
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .cert-controls button:hover,
+        .cert-controls button:focus-visible {
+            transform: translateY(-1px);
+            background: linear-gradient(135deg, rgba(193, 79, 47, 1), rgba(21, 20, 16, 1));
+        }
+
+        .cert-card.highlighted {
+            border-color: rgba(108, 33, 20, 0.95);
+            box-shadow: 0 0 0 2px rgba(108, 33, 20, 0.18);
+            transform: translateY(-2px);
+        }
+
+        .status-message {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
         footer {
             text-align: center;
             color: var(--text-muted);
@@ -280,6 +331,11 @@
             <h2 class="section-title">Certification Phases</h2>
             <p>Certifications are divided into 5 phases, each representing increasing levels of specialization and expertise. Each certification includes specific requirements, authorized weapons, and special abilities.</p>
 
+            <div class="cert-controls">
+                <input id="cert-search" type="search" placeholder="Search certifications, requirements, or divisions..." aria-label="Search certifications" />
+                <button id="random-cert" type="button">Surprise Me</button>
+                <span class="status-message">Ready for certification recon.</span>
+            </div>
             <div class="phase-header">
                 <h3>Phase 1 - Basic Specializations</h3>
                 <p>Entry-level certifications for fundamental combat roles and support positions.</p>
@@ -966,5 +1022,71 @@
             <p>56th Siege Battalion — Without honor, Victory is hollow.</p>
         </footer>
     </div>
+    <script>
+        const navLinks = document.querySelectorAll('nav a');
+        const currentPage = window.location.pathname.split('/').pop();
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+
+        const certSearch = document.getElementById('cert-search');
+        const certCards = Array.from(document.querySelectorAll('.cert-card'));
+        const randomCertButton = document.getElementById('random-cert');
+        const statusMessage = document.querySelector('.status-message');
+
+        const updateStatus = () => {
+            const visible = certCards.filter(card => card.style.display !== 'none').length;
+            statusMessage.textContent = `Showing ${visible} of ${certCards.length} certifications.`;
+        };
+
+        const filterCerts = () => {
+            const query = certSearch.value.trim().toLowerCase();
+            localStorage.setItem('certSearch', query);
+            certCards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                const match = text.includes(query);
+                card.style.display = match ? 'grid' : 'none';
+                if (!match) card.classList.remove('highlighted');
+            });
+            updateStatus();
+        };
+
+        randomCertButton.addEventListener('click', () => {
+            const visibleCards = certCards.filter(card => card.style.display !== 'none');
+            if (!visibleCards.length) return;
+            const randomCard = visibleCards[Math.floor(Math.random() * visibleCards.length)];
+            certCards.forEach(card => card.classList.remove('highlighted'));
+            randomCard.classList.add('highlighted');
+            randomCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            const certName = randomCard.querySelector('h4')?.textContent || 'Certification';
+            statusMessage.textContent = `Highlighting ${certName}.`;
+        });
+
+        certCards.forEach(card => {
+            card.addEventListener('click', () => {
+                certCards.forEach(item => item.classList.remove('highlighted'));
+                card.classList.add('highlighted');
+                const certName = card.querySelector('h4')?.textContent || 'Certification';
+                statusMessage.textContent = `${certName} selected.`;
+            });
+            card.tabIndex = 0;
+            card.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    card.click();
+                }
+            });
+        });
+
+        certSearch.addEventListener('input', filterCerts);
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedQuery = localStorage.getItem('certSearch') || '';
+            certSearch.value = savedQuery;
+            filterCerts();
+        });
+    </script>
 </body>
 </html>
